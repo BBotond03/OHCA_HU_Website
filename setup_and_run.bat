@@ -1,11 +1,11 @@
 @echo off
 setlocal enabledelayedexpansion
-title 🚀 OHCA Hungary Dashboard Setup
+title OHCA Hungary Dashboard Setup
 
-:: Enable ANSI colors (Windows 10+)
-for /f "tokens=2 delims=:." %%i in ('chcp') do set "_chcp=%%i"
+:: Enable UTF-8 (ANSI colors)
 chcp 65001 >nul
 
+:: Colors
 set GREEN=[92m
 set YELLOW=[93m
 set RED=[91m
@@ -42,19 +42,12 @@ if not exist "%BACKEND_VENV%" (
     python -m venv "%BACKEND_VENV%"
 )
 
-if not exist "%BACKEND_VENV%\.deps_installed" (
-    echo %YELLOW%[+] Installing backend dependencies...%RESET%
-    call "%BACKEND_VENV%\Scripts\python.exe" -m pip install --upgrade pip >nul
-    if exist "%BACKEND_DIR%\requirements.txt" (
-        call "%BACKEND_VENV%\Scripts\python.exe" -m pip install -r "%BACKEND_DIR%\requirements.txt"
-    ) else (
-        echo %YELLOW%⚠️ No backend requirements.txt found — skipping dependency install.%RESET%
-    )
-    echo done > "%BACKEND_VENV%\.deps_installed"
-    echo %GREEN%[✓] Backend dependencies installed successfully.%RESET%
-) else (
-    echo %GREEN%[✓] Backend environment ready.%RESET%
+echo %YELLOW%[+] Installing backend dependencies...%RESET%
+call "%BACKEND_VENV%\Scripts\python.exe" -m pip install --upgrade pip >nul
+if exist "%BACKEND_DIR%\requirements.txt" (
+    call "%BACKEND_VENV%\Scripts\python.exe" -m pip install -r "%BACKEND_DIR%\requirements.txt"
 )
+echo %GREEN%[✓] Backend environment ready.%RESET%
 
 :: ===============================
 :: FRONTEND SETUP
@@ -67,19 +60,12 @@ if not exist "%FRONTEND_VENV%" (
     python -m venv "%FRONTEND_VENV%"
 )
 
-if not exist "%FRONTEND_VENV%\.deps_installed" (
-    echo %YELLOW%[+] Installing frontend dependencies...%RESET%
-    call "%FRONTEND_VENV%\Scripts\python.exe" -m pip install --upgrade pip >nul
-    if exist "%FRONTEND_DIR%\requirements.txt" (
-        call "%FRONTEND_VENV%\Scripts\python.exe" -m pip install -r "%FRONTEND_DIR%\requirements.txt"
-    ) else (
-        echo %YELLOW%⚠️ No frontend requirements.txt found — skipping dependency install.%RESET%
-    )
-    echo done > "%FRONTEND_VENV%\.deps_installed"
-    echo %GREEN%[✓] Frontend dependencies installed successfully.%RESET%
-) else (
-    echo %GREEN%[✓] Frontend environment ready.%RESET%
+echo %YELLOW%[+] Installing frontend dependencies...%RESET%
+call "%FRONTEND_VENV%\Scripts\python.exe" -m pip install --upgrade pip >nul
+if exist "%FRONTEND_DIR%\requirements.txt" (
+    call "%FRONTEND_VENV%\Scripts\python.exe" -m pip install -r "%FRONTEND_DIR%\requirements.txt"
 )
+echo %GREEN%[✓] Frontend environment ready.%RESET%
 
 :: ===============================
 :: START BACKEND
