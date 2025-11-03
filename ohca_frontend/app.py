@@ -69,7 +69,7 @@ sidebar.header("📊 County Dashboard")
 if sidebar.button("🔄 Refresh data"):
     st.session_state.pop("county_data", None)
     st.session_state.pop("selected_county", None)
-    st.experimental_rerun()
+    st.rerun()
 
 # --- COLOR SCALE ---
 def color_scale(value):
