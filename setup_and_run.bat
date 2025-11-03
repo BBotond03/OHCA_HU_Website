@@ -5,7 +5,6 @@ title OHCA Hungary Dashboard Setup
 :: Enable UTF-8 (ANSI colors)
 chcp 65001 >nul
 
-
 :: Colors
 set GREEN=[92m
 set YELLOW=[93m
@@ -40,7 +39,7 @@ echo %CYAN%[1/4] Setting up backend environment...%RESET%
 
 if not exist "%BACKEND_VENV%" (
     echo %YELLOW%[+] Creating backend virtual environment...%RESET%
-    python -m v env "%BACKEND_VENV%"
+    python -m venv "%BACKEND_VENV%"
 )
 
 echo %YELLOW%[+] Installing backend dependencies...%RESET%
