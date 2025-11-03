@@ -4,7 +4,9 @@ An interactive web dashboard for visualizing predicted Out-of-Hospital Cardiac A
 
 ## 📸 Preview
 
-*(You should replace this with a screenshot or GIF of your running application)*
+Below is an example of how the full OHCA dashboard looks when running:
+
+![OHCA Dashboard Preview](./ohca_frontend/ohca_dashboard_preview.png)
 
 
 ## 🚀 Getting Started
@@ -25,9 +27,8 @@ cd ohca-dashboard
 
 ### 2. Set up back end and front end.
 
-- run `setup_and_run.bet` this will setup the front and back end and alll necessary dependencies.
+- Run `setup_and_run.bat` — this will set up both the frontend and backend environments and install all necessary dependencies.
 
 
-```
 
 Open your web browser and navigate to `http://localhost:8501`.
