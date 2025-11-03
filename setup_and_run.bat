@@ -5,7 +5,6 @@ title OHCA Hungary Dashboard Setup
 :: Enable UTF-8 (ANSI colors)
 chcp 65001 >nul
 
-reg query HKCU\Console /v VirtualTerminalLevel >nul 2>&1 || reg add HKCU\Console /v VirtualTerminalLevel /t REG_DWORD /d 1 /f >nul
 
 :: Colors
 set GREEN=[92m
@@ -41,7 +40,7 @@ echo %CYAN%[1/4] Setting up backend environment...%RESET%
 
 if not exist "%BACKEND_VENV%" (
     echo %YELLOW%[+] Creating backend virtual environment...%RESET%
-    python -m venv "%BACKEND_VENV%"
+    python -m v env "%BACKEND_VENV%"
 )
 
 echo %YELLOW%[+] Installing backend dependencies...%RESET%
