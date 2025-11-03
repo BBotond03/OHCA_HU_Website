@@ -67,10 +67,9 @@ sidebar = st.sidebar
 sidebar.header("📊 County Dashboard")
 
 if sidebar.button("🔄 Refresh data"):
-    # Clear all relevant session state keys
     st.session_state.pop("county_data", None)
     st.session_state.pop("selected_county", None)
-    st.rerun()
+    st.experimental_rerun()
 
 # --- COLOR SCALE ---
 def color_scale(value):
@@ -87,77 +86,77 @@ zoom = 7
 if "selected_county" not in st.session_state:
     st.session_state.selected_county = None
 
-# --- CREATE MAP ---
-m = folium.Map(
-    location=center,
-    zoom_start=zoom,
-    min_zoom=7,
-    max_zoom=7,
-    zoom_control=False,
-    scrollWheelZoom=False,
-    dragging=False,
-    doubleClickZoom=False,
-)
+# --- MAP CONTAINER ---
+map_container = st.container()  # single container to overlay map
 
-# --- ADD GEOJSON LAYERS ---
-for feature in counties["features"]:
-    name = feature["properties"]["name"]
-    if name not in data_dict:
-        continue
-    
-    county_data = data_dict[name]
-    predicted_cases = county_data.get("predicted_cases")
-    color = color_scale(predicted_cases)
+# --- FUNCTION TO RENDER MAP ---
+def render_map():
+    m = folium.Map(
+        location=center,
+        zoom_start=zoom,
+        min_zoom=7,
+        max_zoom=7,
+        zoom_control=False,
+        scrollWheelZoom=False,
+        dragging=False,
+        doubleClickZoom=False,
+    )
 
-    # Highlight the selected county
-    border_color = "blue" if st.session_state.get("selected_county") == name else "black"
-    border_weight = 4 if st.session_state.get("selected_county") == name else 1
+    # --- ADD GEOJSON LAYERS ---
+    for feature in counties["features"]:
+        name = feature["properties"]["name"]
+        if name not in data_dict:
+            continue
 
-    folium.GeoJson(
-        feature,
-        style_function=lambda _, v=color, bc=border_color, bw=border_weight: {
-            "fillColor": v,
-            "color": bc,
-            "weight": bw,
-            "fillOpacity": 0.6,
-        },
-        highlight_function=lambda x: {"weight": 3, "color": "blue", "fillOpacity": 0.8},
-    ).add_to(m)
+        county_data = data_dict[name]
+        predicted_cases = county_data.get("predicted_cases")
+        color = color_scale(predicted_cases)
 
-# --- DISPLAY MAP AND GET CLICK ---
-map_click_data = st_folium(
-    m,
-    key="map",
-    returned_objects=["last_clicked"],
-    width=1200,
-    height=700,
-)
+        # Highlight selected county
+        border_color = "blue" if st.session_state.get("selected_county") == name else "black"
+        border_weight = 4 if st.session_state.get("selected_county") == name else 1
 
-# --- PROCESS CLICK AND RERUN IF SELECTION CHANGES ---
-# This is the core logic fix.
-# When a click happens, we determine the new county.
-# If the selected county has changed, we update session_state and
-# immediately rerun the script. This ensures the map is redrawn
-# with the new selection in the very next frame.
+        # Fix lambda closure
+        folium.GeoJson(
+            feature,
+            style_function=lambda feature, v=color, bc=border_color, bw=border_weight: {
+                "fillColor": v,
+                "color": bc,
+                "weight": bw,
+                "fillOpacity": 0.6,
+            },
+            highlight_function=lambda x: {"weight": 3, "color": "blue", "fillOpacity": 0.8},
+        ).add_to(m)
+
+    return st_folium(
+        m,
+        key="map",
+        returned_objects=["last_clicked"],
+        width=1200,
+        height=700,
+    )
+
+# --- RENDER MAP IN PLACE ---
+with map_container:
+    map_click_data = render_map()
+
+# --- PROCESS CLICK AND RERUN ---
 if map_click_data and map_click_data.get("last_clicked"):
     coords = map_click_data["last_clicked"]
     point = Point(coords["lng"], coords["lat"])
-    
+
     clicked_county = None
     for feature in counties["features"]:
         polygon = shape(feature["geometry"])
         if polygon.contains(point):
             clicked_county = feature["properties"]["name"]
             break
-    
-    # If the click was on a valid county AND it's different from the current one
+
     if clicked_county and st.session_state.get("selected_county") != clicked_county:
         st.session_state.selected_county = clicked_county
-        st.rerun() # The key to the fix!
+        st.experimental_rerun()
 
 # --- SHOW COUNTY DETAILS IN SIDEBAR ---
-# This code will now always run with the correct selected_county,
-# because if it changed, the script would have rerun before reaching here.
 if st.session_state.get("selected_county"):
     county_name = st.session_state["selected_county"]
     county_data = data_dict.get(county_name, {})
