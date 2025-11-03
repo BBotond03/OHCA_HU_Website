@@ -20,7 +20,7 @@ Follow these instructions to set up and run the dashboard on your local machine.
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/your-username/ohca-dashboard.git
+git clone https://github.com/BBotond03/OHCA_HU_Website.git
 cd ohca-dashboard
 ```
 
