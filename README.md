@@ -26,7 +26,7 @@ If you download the repository manually, Windows may modify the line endings (`\
 Use this command instead:
 
 ```bash
-git clone https://github.com/your-username/OHCA_HU_Website.git
+git clone https://github.com/BBotond03/OHCA_HU_Website.git
 ```
 
 This ensures the batch file keeps its correct line endings and works properly on Windows.
