@@ -21,7 +21,6 @@ Follow these instructions to set up and run the dashboard on your local machine.
 
 ```bash
 git clone https://github.com/BBotond03/OHCA_HU_Website.git
-cd ohca-dashboard
 ```
 
 ### 2. Set up back end and front end.
