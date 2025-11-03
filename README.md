@@ -18,10 +18,18 @@ Follow these instructions to set up and run the dashboard on your local machine.
 -   Python 3.8+
 
 ### 1. Clone the Repository
+⚠️ **Important:**
+You must **clone** this repository using Git instead of downloading it as a ZIP file from the GitHub website.
+
+If you download the repository manually, Windows may modify the line endings (`\r\n`) in the `setup_and_run.bat` file, causing it to break (e.g., `'delayedexpansion' is not recognized` or similar errors).
+
+Use this command instead:
 
 ```bash
-git clone https://github.com/BBotond03/OHCA_HU_Website.git
+git clone https://github.com/your-username/OHCA_HU_Website.git
 ```
+
+This ensures the batch file keeps its correct line endings and works properly on Windows.
 
 ### 2. Set up back end and front end.
 
