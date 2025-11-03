@@ -139,18 +139,6 @@ streamlit run app.py
 
 Open your web browser and navigate to `http://localhost:8501`.
 
-## 📂 Project Structure
-
-```
-.
-├── data/
-│   └── hu.json           # GeoJSON file with county boundaries
-├── .env                  # Environment variables (backend URL)
-├── .gitignore            # Standard Python gitignore
-├── app.py                # The main Streamlit application script
-├── README.md             # You are here!
-└── requirements.txt      # Python dependencies
-```
 
 ## 📜 License
 
