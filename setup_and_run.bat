@@ -5,6 +5,8 @@ title OHCA Hungary Dashboard Setup
 :: Enable UTF-8 (ANSI colors)
 chcp 65001 >nul
 
+reg query HKCU\Console /v VirtualTerminalLevel >nul 2>&1 || reg add HKCU\Console /v VirtualTerminalLevel /t REG_DWORD /d 1 /f >nul
+
 :: Colors
 set GREEN=[92m
 set YELLOW=[93m
