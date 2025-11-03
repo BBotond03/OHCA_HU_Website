@@ -16,7 +16,6 @@ Follow these instructions to set up and run the dashboard on your local machine.
 ### Prerequisites
 
 -   Python 3.8+
--   A running instance of the backend prediction service.
 
 ### 1. Clone the Repository
 
