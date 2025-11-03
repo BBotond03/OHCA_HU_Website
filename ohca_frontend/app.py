@@ -154,7 +154,7 @@ if map_click_data and map_click_data.get("last_clicked"):
 
     if clicked_county and st.session_state.get("selected_county") != clicked_county:
         st.session_state.selected_county = clicked_county
-        st.experimental_rerun()
+        st.rerun()
 
 # --- SHOW COUNTY DETAILS IN SIDEBAR ---
 if st.session_state.get("selected_county"):
