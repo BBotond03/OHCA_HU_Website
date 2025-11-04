@@ -6,6 +6,10 @@ import requests
 import os
 from dotenv import load_dotenv
 from shapely.geometry import shape, Point
+from datetime import datetime
+from weather_sidebar import render_weather_sidebar as render_weather_sidebar
+
+
 
 # --- LOAD ENV VARIABLES ---
 load_dotenv()
@@ -156,22 +160,8 @@ if map_click_data and map_click_data.get("last_clicked"):
         st.session_state.selected_county = clicked_county
         st.rerun()
 
-# --- SHOW COUNTY DETAILS IN SIDEBAR ---
+# --- SHOW COUNTY DETAILS IN SIDEBAR ---wa
 if st.session_state.get("selected_county"):
     county_name = st.session_state["selected_county"]
     county_data = data_dict.get(county_name, {})
-    
-    sidebar.subheader(f"📍 {county_name}")
-    sidebar.markdown(f"🌡️ Temperature: **{county_data.get('temperature', 'N/A')} °C**")
-    sidebar.markdown(f"💧 Humidity: **{county_data.get('humidity', 'N/A')}%**")
-    sidebar.markdown(f"📅 Yesterday cases: **{county_data.get('yesterday_cases', 'N/A')}**")
-    sidebar.markdown(f"🔮 Predicted cases: **{county_data.get('predicted_cases', 'N/A')}**")
-    
-    mortality_rate = county_data.get('mortality_rate', 0)
-    sidebar.markdown(f"⚰️ Mortality rate: **{mortality_rate*100:.1f}%**")
-
-# --- LEGEND ---
-with sidebar.expander("🗺️ Color Legend", expanded=True):
-    st.markdown("🟩 **Low risk:** Predicted < 60 cases")
-    st.markdown("🟧 **Moderate risk:** 60 ≤ Predicted < 90 cases")
-    st.markdown("🟥 **High risk:** Predicted ≥ 90 cases")
+    render_weather_sidebar(sidebar, county_name, county_data)
