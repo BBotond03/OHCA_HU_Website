@@ -1,0 +1,30 @@
+# Python caches
+__pycache__/
+*.py[cod]
+*.so
+
+# Virtual environments
+venv/
+.venv/
+env/
+ENV/
+ohca_backend/venv/
+ohca_frontend/venv/
+
+# Environment & secrets
+.env
+*.env
+
+# Streamlit
+.streamlit/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# IDE / editor settings
+.vscode/
+.idea/
+
+# OS-specific junk
+.DS_Store
+Thumbs.db
