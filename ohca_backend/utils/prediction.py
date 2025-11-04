@@ -12,7 +12,4 @@ def predict_cases(county: str, weather_data: dict):
     return {
         "yesterday_cases": base - random.randint(0, 15),
         "predicted_cases": base,
-        "mortality_rate": mortality,
-        "temperature": temp,
-        "humidity": humidity,
     }

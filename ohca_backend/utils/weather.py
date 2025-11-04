@@ -1,5 +1,5 @@
 import requests
-
+from utils.mortality import get_mortality_rate_for_county
 # --- Predefined coordinates for Hungarian counties ---
 # (approximate centroids for reliable weather queries)
 COUNTY_COORDS = {
@@ -71,6 +71,7 @@ def get_weather_for_county(county_name: str):
         times = daily.get("time") or []
         tmean = daily.get("temperature_2m_mean") or []
         hmean = daily.get("relative_humidity_2m_mean") or []
+        mortality = get_mortality_rate_for_county(county_name)
 
         temperature_mean_today = tmean[0] if len(tmean) > 0 else None
         humidity_mean_today = hmean[0] if len(hmean) > 0 else None
@@ -91,6 +92,8 @@ def get_weather_for_county(county_name: str):
             "temperature_mean_today": temperature_mean_today,
             "humidity_mean_today": humidity_mean_today,
             "forecast_mean": forecast_mean,
+            "mortality_rate": mortality,
+            
         }
 
     except Exception as e:
