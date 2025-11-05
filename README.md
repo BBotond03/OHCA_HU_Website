@@ -35,6 +35,3 @@ This ensures the batch file keeps its correct line endings and works properly on
 
 - Run `setup_and_run.bat` — this will set up both the frontend and backend environments and install all necessary dependencies.
 
-
-
-Open your web browser and navigate to `http://localhost:8501`.
