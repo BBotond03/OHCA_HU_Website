@@ -1,13 +1,13 @@
-# --- Predefined mortality rates for Hungarian regions ---
+# --- Predefined mortality rates for Hungarian regions ---# not real mortality rates rn!!!
 mortality_rates = {
-    "BUDAPEST": 0.084847,
-    "DÉL-ALFÖLD": 0.123732,
-    "DÉL-DUNÁNTÚL": 0.104159,
-    "KÖZÉP-DUNÁNTÚL": 0.100511,
-    "KÖZÉP-MAGYARORSZÁG": 0.094100,
-    "NYUGAT-DUNÁNTÚL": 0.097708,
-    "ÉSZAK-ALFÖLD": 0.071052,
-    "ÉSZAK-MAGYARORSZÁG": 0.075507
+    "BUDAPEST": 0.092,
+    "DÉL-ALFÖLD": 0.11,
+    "DÉL-DUNÁNTÚL": 0.095,
+    "KÖZÉP-DUNÁNTÚL": 0.10,
+    "KÖZÉP-MAGYARORSZÁG": 0.09,
+    "NYUGAT-DUNÁNTÚL": 0.092,
+    "ÉSZAK-ALFÖLD": 0.06,
+    "ÉSZAK-MAGYARORSZÁG": 0.08
 }
 
 # --- Mapping of region capitals/counties to their main region ---

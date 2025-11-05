@@ -1,0 +1,7 @@
+{
+  "temp_c": "temp_c_ratio_pct5.csv",
+  "rh_pct": "rh_pct_ratio_pct5.csv",
+  "precip_mm": "precip_mm_ratio_pct5.csv",
+  "wind_speed_ms": "wind_speed_ms_ratio_pct5.csv",
+  "pressure_hpa": "pressure_hpa_ratio_pct5.csv"
+}
